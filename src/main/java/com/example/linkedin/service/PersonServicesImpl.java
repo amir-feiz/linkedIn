@@ -1,6 +1,7 @@
 package com.example.linkedin.service;
 
 import com.example.linkedin.exception.EntityNotFoundException;
+import com.example.linkedin.model.Graph;
 import com.example.linkedin.model.Person;
 import com.example.linkedin.model.response.BooleanResponse;
 import com.example.linkedin.model.response.PersonResponse;
@@ -133,6 +134,10 @@ public class PersonServicesImpl implements PersonServicesInterface {
 
     @Override
     public void connect(Long id1, Long id2) {
+        System.out.println("Salam");
+        Graph graph = new Graph();
+        System.out.println(graph.bfs(Long.valueOf(1)));
+
         if (personRepository.findById(id1).isEmpty() || personRepository.findById(id2).isEmpty())
             throw new EntityNotFoundException();
         Person p1 = personRepository.findById(id1).get();
@@ -144,5 +149,7 @@ public class PersonServicesImpl implements PersonServicesInterface {
         personRepository.save(p1);
         personRepository.save(p2);
 
+
     }
+
 }
