@@ -2,9 +2,11 @@ package com.example.linkedin.service;
 
 import com.example.linkedin.exception.EntityNotFoundException;
 import com.example.linkedin.model.Graph;
+import com.example.linkedin.model.LastNumber;
 import com.example.linkedin.model.Person;
 import com.example.linkedin.model.response.BooleanResponse;
 import com.example.linkedin.model.response.PersonResponse;
+import com.example.linkedin.repository.LastIdRepository;
 import com.example.linkedin.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,7 +29,7 @@ import java.util.Set;
 public class PersonServicesImpl implements PersonServicesInterface {
 
     private PersonRepository personRepository;
-
+    private LastIdRepository lastIdRepository;
     @Override
     public BooleanResponse readFile() throws IOException, ParseException {
 
@@ -58,6 +60,8 @@ public class PersonServicesImpl implements PersonServicesInterface {
                     person.getConnections().add(Long.parseLong((String)o1));
                 personRepository.save(person);
             }
+            lastIdRepository.deleteAll();
+            lastIdRepository.save(new LastNumber(Long.valueOf(599)));
 
         return new BooleanResponse(true);
     }
@@ -134,22 +138,24 @@ public class PersonServicesImpl implements PersonServicesInterface {
 
     @Override
     public void connect(Long id1, Long id2) {
+
+//        if (personRepository.findById(id1).isEmpty() || personRepository.findById(id2).isEmpty())
+//            throw new EntityNotFoundException();
+//        Person p1 = personRepository.findById(id1).get();
+//        Person p2 = personRepository.findById(id2).get();
+//
+//        p1.getConnections().add(p2.getId());
+//        p2.getConnections().add(p1.getId());
+//
+//        personRepository.save(p1);
+//        personRepository.save(p2);
+
         System.out.println("Salam");
-        Graph graph = new Graph();
+        Graph graph = new Graph(personRepository.findAll());
         System.out.println(graph.bfs(Long.valueOf(1)));
 
-        if (personRepository.findById(id1).isEmpty() || personRepository.findById(id2).isEmpty())
-            throw new EntityNotFoundException();
-        Person p1 = personRepository.findById(id1).get();
-        Person p2 = personRepository.findById(id2).get();
-
-        p1.getConnections().add(p2.getId());
-        p2.getConnections().add(p1.getId());
-
-        personRepository.save(p1);
-        personRepository.save(p2);
-
-
     }
+
+
 
 }

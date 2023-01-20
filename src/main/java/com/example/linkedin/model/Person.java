@@ -33,5 +33,10 @@ public class Person {
     @ElementCollection
     Set<Long> connections = new HashSet<>();
 
+    int levelScore = 1;
+    int fieldLevel=1;
+    int universityLevel = 1;
+    int workPlaceLevel = 1;
+
 
 }
