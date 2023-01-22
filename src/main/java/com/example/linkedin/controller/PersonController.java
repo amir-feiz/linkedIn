@@ -2,6 +2,7 @@ package com.example.linkedin.controller;
 
 import com.example.linkedin.model.Person;
 import com.example.linkedin.model.request.Input;
+import com.example.linkedin.model.request.PriorityInput;
 import com.example.linkedin.model.request.TwoIdInput;
 import com.example.linkedin.model.request.TwoPersonInput;
 import com.example.linkedin.model.response.BooleanResponse;
@@ -58,4 +59,25 @@ public class PersonController {
         personServices.connect(twoIdInput.getId1(), twoIdInput.getId2());
         return HttpStatus.OK;
     }
+    @GetMapping("/recommend")
+    @CrossOrigin
+    public ResponseEntity<ArrayList<Person>> recommend(@RequestBody Input input) {
+        return new ResponseEntity<>(personServices.recommended(Long.parseLong(input.getId())), HttpStatus.OK);
+
+    }
+
+    @GetMapping("/signIn")
+    @CrossOrigin
+    public ResponseEntity<ArrayList<Person>> signIn(@RequestBody Person input) {
+        return new ResponseEntity<>(personServices.signIn(input), HttpStatus.OK);
+
+    }
+    @GetMapping("/priorityChange")
+    @CrossOrigin
+    public HttpStatus allUsers(@RequestBody PriorityInput priorityInput) {
+        personServices.changePriority(priorityInput.getId(),priorityInput.getLevelScore(), priorityInput.getFieldScore(),
+                priorityInput.getUniversityScore(), priorityInput.getWorkPlaceScore(), priorityInput.getSpecialitiesScore());
+        return HttpStatus.OK;
+    }
+
 }

@@ -1,6 +1,5 @@
 package com.example.linkedin;
 
-import com.example.linkedin.model.Graph;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

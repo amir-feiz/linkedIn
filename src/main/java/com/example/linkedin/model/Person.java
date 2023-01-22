@@ -3,7 +3,6 @@ package com.example.linkedin.model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -17,7 +16,7 @@ import java.util.Set;
 @Data
 public class Person {
     @Id
-    @GeneratedValue
+//    @GeneratedValue
     private Long id;
 
     String name;
@@ -34,9 +33,10 @@ public class Person {
     Set<Long> connections = new HashSet<>();
 
     int levelScore = 1;
-    int fieldLevel=1;
-    int universityLevel = 1;
-    int workPlaceLevel = 1;
+    int fieldScore=1;
+    int universityScore = 1;
+    int workPlaceScore = 1;
+    int specialitiesScore=1;
 
 
 }

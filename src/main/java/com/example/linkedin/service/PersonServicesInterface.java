@@ -21,4 +21,8 @@ public interface PersonServicesInterface {
     Person search(String inputToFind);
     ArrayList<PersonResponse> allUsers();
     void connect(Long id1,Long id2);
+    ArrayList<Person> recommended(Long id);
+    ArrayList<Person> signIn(Person p);
+
+    void changePriority(Long id,int levelScore, int fieldScore, int universityScore, int workPlaceScore, int specialitiesScore);
 }
